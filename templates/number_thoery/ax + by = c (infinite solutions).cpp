@@ -9,9 +9,10 @@
 ## HOW TO USE
 
 if x, y are the solutions then all infinite solutions are  
- 
- x = x0 + k * (b / g)
- y = y0 - k * (a / g)
+x0, yo and g(gcd) can be declared as variables and passed to the function (find any solution)
+
+x = x0 + k * (b / g)
+y = y0 - k * (a / g)
 
 
  and k can be -inf to inf
