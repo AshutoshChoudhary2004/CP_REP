@@ -24,3 +24,5 @@
   y = y0 = v = y0 - ka/g
 
   where k can be any integer value in the entire Z plane
+
+4. Also in recursive code we find solutions for positve a, b and if a < 0 we multiply x0 by -1, and if b < 0 then we multiply y0 by -1
