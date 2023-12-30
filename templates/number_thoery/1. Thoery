@@ -1,0 +1,26 @@
+1. consider equation ax + by = c, where a, b, c belong to Z
+2. The integer solutions of this equation only exist's when c is divisible by gcd(a, b)
+3. Steps to find solutions
+
+- first we find any roots to the equations ax + by = g where g = gcd(a, b)
+- these roots can be caldculated by some recursive code
+- now to calculate any roots for the equation ax + by = c, we multiply those roots by c / g
+- let those roots be x0, and y0
+- if you consdier any general solution of these equations to be x, y then x it can be represented of the form
+  x = xo + u
+  y = yo + v
+
+  and when you put these values in ax + by = c, we get
+  au + bv = 0
+  therefore u = -bv/a
+  if v has to be integer then v should be divisible by whatever is the denominator obtained by reducing b / a to it's standard form
+  and the standard form of p / q is (p / gcd(p, q)) / (q / gcd(p, q))
+
+  therefore v can be represented as k * a / g 
+  and therefore u can be represented as k * b / g
+
+  therefore the general solutions of the equations ax + by = c are
+  x = x0 + u = x0 + kb/g
+  y = y0 = v = y0 - ka/g
+
+  where k can be any integer value in the entire Z plane
