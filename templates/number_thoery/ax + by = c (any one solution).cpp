@@ -1,5 +1,10 @@
+/*
+
+## IMP POINTS : 
+
 1) does not work when a or b == 0
-2) works for even negative values of a and b
+2) works for even negative values of a and b 
+*/
 
 /////////////////////////////////////////////////////////////////////////////
 int gcd(int a, int b, int& x, int& y) {
