@@ -11,6 +11,8 @@ using namespace std;
 #define si(x) (int)(x).size()
 #define mset(m,v) memset(m,v,sizeof(m))
 #define mp make_pair
+#define F first
+#define S second
 
 template <class S, class T> ostream& operator <<(ostream& os, const vector<pair<S, T>>& p) { os << "[ "; for (const auto& it : p) os << it << " "; return os << "]"; }
 template <class T> ostream& operator <<(ostream& os, const vector<vector<T>>& p) { os << "[ "; for (const auto& inner_vec : p) { os << "[ "; for (const auto& elem : inner_vec) os << elem << " "; os << "] "; } return os << "]"; }
