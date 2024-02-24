@@ -1,5 +1,5 @@
 struct DSU {
-    vector<int> par, sz
+    vector<int> par, sz;
     vector<ll> d;
     
     void init(int n) {
