@@ -1,11 +1,11 @@
 if you want to rollback to the preivous state of dsu
 then dont use path compression, then change will happen only after a union operation
 
-change : 
+change that will happen: 
 par[xx] = yy
 sz[yy] += sz[xx]
 therefore after each operation
 store in an array this xx
 therefore to rollback to previous sate
-and we know yy from par[xx], therefore sz[yy] -= sz[xx]
-we ill set par[xx] = xx
+we know yy from par[xx], therefore sz[yy] -= sz[xx]
+we will set par[xx] = xx
