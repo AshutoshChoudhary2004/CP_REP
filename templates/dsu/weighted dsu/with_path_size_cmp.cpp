@@ -1,6 +1,9 @@
 /*
 code for weighted dsu with path compresssion and size compression
 time complexity : O(5) each dsu operation
+
+- find(x) : gives ultimate parent or set no of x
+- unite(x, y) : returns true if the given relation is valid / consistent, also if it is valid adds the relation, and merges botht the sets
 */
 
 struct DSU {
