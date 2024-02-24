@@ -1,3 +1,8 @@
+/*
+code for weighted dsu with path compresssion and size compression
+time complexity : O(5) each dsu operation
+*/
+
 struct DSU {
     vector<int> par, sz;
     vector<ll> d;
