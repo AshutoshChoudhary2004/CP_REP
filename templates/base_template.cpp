@@ -8,6 +8,7 @@ using namespace std;
 #define ins insert
 #define fr(i, n) for(int i = 0; i < n; ++ i)
 #define rep(i, a, b) for (int i = a; i <= b; ++ i)
+#define per(i, a, b) for (int i = b; i >= a; -- i)
 #define si(x) (int)(x).size()
 #define mset(m,v) memset(m,v,sizeof(m))
 #define mp make_pair
