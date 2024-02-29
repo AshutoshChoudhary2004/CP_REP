@@ -17,6 +17,20 @@ using namespace std;
 #define lb lower_bound
 #define ub upper_bound
 
+#define max2(a, b) ((a) > (b) ? (a) : (b))
+#define max3(a, b, c) max2(max2(a, b), c)
+#define max4(a, b, c, d) max2(max2(a, b), max2(c, d))
+#define max5(a, b, c, d, e) max2(max4(a, b, c, d), e)
+#define max6(a, b, c, d, e, f) max2(max4(a, b, c, d), max2(e, f))
+#define max7(a, b, c, d, e, f, g) max2(max4(a, b, c, d), max3(e, f, g))
+
+#define min2(a, b) ((a) < (b) ? (a) : (b))
+#define min3(a, b, c) min2(min2(a, b), c)
+#define min4(a, b, c, d) min2(min2(a, b), min2(c, d))
+#define min5(a, b, c, d, e) min2(min4(a, b, c, d), e)
+#define min6(a, b, c, d, e, f) min2(min4(a, b, c, d), min2(e, f))
+#define min7(a, b, c, d, e, f, g) min2(min4(a, b, c, d), min3(e, f, g))
+
 typedef vector<int> vi;
 typedef vector<ll> vl;
 
