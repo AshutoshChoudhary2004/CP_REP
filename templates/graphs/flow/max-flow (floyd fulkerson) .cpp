@@ -13,7 +13,7 @@ struct MaxFlow {
 
     void init(int _n) {
         n = _n;
-        c.assign(n, vector<ll>(n, 0));
+        c.assign(n, vl(n, 0));
         g.resize(n);
         vis.assign(n, false);
     }
@@ -21,6 +21,7 @@ struct MaxFlow {
     void add_edge(int u, int v, ll x) {
         c[u][v] += x;
         g[u].pb(v);
+        g[v].pb(u);
     }
 
     ll dfs(int u, ll cur) {
@@ -42,6 +43,9 @@ struct MaxFlow {
     ll max_flow() {
         ll cur = -1;
         ll res = 0;
+        fr(i, n){
+            get_unique(g[i]); 
+        }
         while (cur) {
             cur = dfs(0, INT_MAX);
             res += cur;
