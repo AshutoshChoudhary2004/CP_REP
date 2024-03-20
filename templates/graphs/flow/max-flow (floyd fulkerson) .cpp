@@ -4,17 +4,16 @@ Time Complexity : O(E * max_flow)
 
 uses adjacency matrix
 */
-const int N = 500;
 
 struct MaxFlow {
-    int n, m;
-    ll g[N][N];
-    bool vis[N];
+    int n;
+    vector<vector<ll>> g;
+    vector<bool> vis;
 
     void init(int _n, int _m) {
         n = _n;
-        m = _m;
-        mset(g, sizeof(g));
+        g.assign(n, vector<ll>(n, 0));
+        vis.assign(n, false);
     }
 
     void add_edge(int u, int v, ll x) {
@@ -44,7 +43,7 @@ struct MaxFlow {
         while (cur) {
             cur = dfs(0, INT_MAX);
             res += cur;
-            mset(vis, false);
+            fill(vis.begin(), vis.end(), false);
         }
         return res;
     }
@@ -58,7 +57,7 @@ int main() {
     cin >> n >> m;
 
     MaxFlow flow;
-    flow.init(n, m);
+    flow.init(n);
     for (int i = 0; i < m; ++i) {
         int u, v, x;
         cin >> u >> v >> x;
