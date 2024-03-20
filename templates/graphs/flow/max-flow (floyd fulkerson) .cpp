@@ -2,7 +2,7 @@
 Returns value of max flow
 Time Complexity : O(E * max_flow)
 
-uses adjacency matrix
+space : O(N ^ 2)
 */
 
 struct MaxFlow {
