@@ -46,6 +46,12 @@ typedef vector<pll> vpll;
 typedef vector<pli> vpli;
 typedef vector<pil> vpil;
 
+template <typename T>
+void get_unique(vector<T>& a) {
+    sort(a.begin(), a.end());
+    a.erase(std::unique(a.begin(), a.end()), a.end());
+}
+
 template <class S, class T> ostream& operator<<(ostream& os, const vector<pair<S, T>>& p) { os << "[ "; for (auto it = p.begin(); it != p.end(); ++it) { os << *it; if (it != prev(p.end())) { os << ", "; } } os << " ]"; return os; }
 template <class T> ostream& operator<<(ostream& os, const vector<vector<T>>& p) { os << "[ "; for (auto it = p.begin(); it != p.end(); ++it) { os << "[ "; for (auto inner_it = it->begin(); inner_it != it->end(); ++inner_it) { os << *inner_it; if (inner_it != prev(it->end())) { os << ", "; } } os << " ]"; if (it != prev(p.end())) { os << ", "; } } os << " ]"; return os; }
 template <class S, class T> ostream& operator<<(ostream& os, const pair<S, T>& p) { return os << "(" << p.first << ", " << p.second << ")"; }
