@@ -10,14 +10,13 @@ struct MaxFlow {
     vector<vector<ll>> g;
     vector<bool> vis;
 
-    void init(int _n, int _m) {
+    void init(int _n) {
         n = _n;
         g.assign(n, vector<ll>(n, 0));
         vis.assign(n, false);
     }
 
     void add_edge(int u, int v, ll x) {
-        --u, --v;
         g[u][v] += x;
     }
 
@@ -55,16 +54,13 @@ int main() {
 
     int n, m;
     cin >> n >> m;
-
-    MaxFlow flow;
-    flow.init(n);
-    for (int i = 0; i < m; ++i) {
+    MaxFlow obj;
+    obj.init(n);
+    fr(i, m){
         int u, v, x;
         cin >> u >> v >> x;
-        flow.add_edge(u, v, x);
+        -- u, -- v;
+        obj.add_edge(u, v, x);
     }
-
-    cout << flow.max_flow();
-
-    return 0;
+    cout << obj.max_flow();
 }
