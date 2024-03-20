@@ -1,4 +1,9 @@
+/*
+Returns value of max flow
+Time Complexity : O(E * max_flow)
 
+uses adjacency matrix
+*/
 const int N = 500;
 
 struct MaxFlow {
