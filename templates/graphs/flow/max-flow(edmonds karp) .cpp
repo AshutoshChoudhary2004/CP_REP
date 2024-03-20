@@ -2,7 +2,7 @@
 
 Returns the value of max flow
 Time Complexity : O(V * E * E)
-Space Complexity : O(N ^ 2)
+Space Complexity : O(V ^ 2)
 
 */
 
