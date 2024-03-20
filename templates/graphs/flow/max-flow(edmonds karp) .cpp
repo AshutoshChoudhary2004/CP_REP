@@ -1,8 +1,8 @@
 /*
 
 Returns the value of max flow
-Time Complexity : V * E * E
-Space Complexity : N ^ 2
+Time Complexity : O(V * E * E)
+Space Complexity : O(N ^ 2)
 
 */
 
