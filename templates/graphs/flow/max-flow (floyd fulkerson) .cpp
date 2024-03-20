@@ -7,28 +7,31 @@ uses adjacency matrix
 
 struct MaxFlow {
     int n;
-    vector<vector<ll>> g;
+    vvl c;
+    vvi g;
     vector<bool> vis;
 
     void init(int _n) {
         n = _n;
-        g.assign(n, vector<ll>(n, 0));
+        c.assign(n, vector<ll>(n, 0));
+        g.resize(n);
         vis.assign(n, false);
     }
 
     void add_edge(int u, int v, ll x) {
-        g[u][v] += x;
+        c[u][v] += x;
+        g[u].pb(v);
     }
 
     ll dfs(int u, ll cur) {
         if (u == n - 1) return cur;
         vis[u] = true;
-        for (int v = 0; v < n; ++v) {
-            if (!vis[v] && g[u][v]) {
-                ll val = dfs(v, min(cur, g[u][v]));
+        for (int v : g[u]){
+            if (!vis[v] && c[u][v]) {
+                ll val = dfs(v, min(cur, c[u][v]));
                 if (val > 0) {
-                    g[u][v] -= val;
-                    g[v][u] += val;
+                    c[u][v] -= val;
+                    c[v][u] += val;
                     return val;
                 }
             }
