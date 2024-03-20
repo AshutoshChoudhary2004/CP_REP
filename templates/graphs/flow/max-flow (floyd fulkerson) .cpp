@@ -49,7 +49,7 @@ struct MaxFlow {
         while (cur) {
             cur = dfs(0, INT_MAX);
             res += cur;
-            fill(vis.begin(), vis.end(), false);
+            fill(all(vis), false);
         }
         return res;
     }
