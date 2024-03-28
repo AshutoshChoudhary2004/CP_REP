@@ -6,7 +6,7 @@ Space Complexity : O(V + E)
 
 */
 
-struct Dinic {
+struct MaxFlow {
 	using F = ll; // flow type
 	struct Edge { int to; F flo, cap; };
 	int N; vector<Edge> eds; vector<vi> adj;
