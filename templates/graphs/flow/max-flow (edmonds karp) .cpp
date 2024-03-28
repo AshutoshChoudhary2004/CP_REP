@@ -25,17 +25,17 @@ struct MaxFlow{
         g[v].pb(u);
         c[u][v] += x;
     }
-    ll bfs() {
+    ll bfs(int s, int t) {
         fill(all(vis), false);
         fill(all(p), -1); 
-        vis[0] = true;
+        vis[s] = true;
         queue<pll> q;
-        q.push(mp(0, INT_MAX));
+        q.push(mp(s, INT_MAX));
         while (si(q)){
             int u = q.front().F;
             ll cur = q.front().S;
             q.pop();
-            if (u == n - 1) return cur;
+            if (u == t) return cur;
             for (int v : g[u]){
                 if (!vis[v] && c[u][v]){
                     vis[v] = true;
@@ -47,12 +47,12 @@ struct MaxFlow{
         return 0;
     }
 
-    ll max_flow() {
+    ll max_flow(int s, int t) {
         fr(i, n) get_unique(g[i]);
         ll res = 0;
         ll cur = 0;
         do {
-            cur = bfs();
+            cur = bfs(s, t);
             res += cur;
             int v = n - 1;
             while (v){
@@ -81,5 +81,5 @@ int main(){
         -- u, -- v;
         obj.add_edge(u, v, x);
     }
-    cout << obj.max_flow();
+    cout << obj.max_flow(0, n - 1);
 }
