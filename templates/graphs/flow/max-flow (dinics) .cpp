@@ -2,6 +2,7 @@
 
 Works for both directed, undirected
 Returns the value of max flow, edges that are in mincut along with their flow
+We can also print the flow on each edge after max flow
 To use : 
 
 dinic<ll> obj;
