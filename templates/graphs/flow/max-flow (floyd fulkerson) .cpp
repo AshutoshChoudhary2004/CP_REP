@@ -1,5 +1,6 @@
 /*
 Returns value of max flow
+No need of constructing graph, just init the value of total nodes(N) and add all the edges using add_edges
 Time Complexity : O(E * max_flow)
 
 space : O(V ^ 2)
