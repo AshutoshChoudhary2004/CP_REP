@@ -49,7 +49,7 @@ typedef vector<pil> vpil;
 template <typename T>
 void get_unique(vector<T>& a) {
     sort(a.begin(), a.end());
-    a.erase(std::unique(a.begin(), a.end()), a.end());
+    a.erase(unique(a.begin(), a.end()), a.end());
 }
 
 template <class S, class T> ostream& operator<<(ostream& os, const vector<pair<S, T>>& p) { os << "[ "; for (auto it = p.begin(); it != p.end(); ++it) { os << *it; if (it != prev(p.end())) { os << ", "; } } os << " ]"; return os; }
