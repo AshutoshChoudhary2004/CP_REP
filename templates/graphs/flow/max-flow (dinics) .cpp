@@ -19,6 +19,7 @@ struct MaxFlow{
     vector<vector<Edge>> g;
     vi level, next;
     vector<bool> vis;
+    ll max_flow_res;
 
     void init(int _n){
         n = _n;
@@ -75,7 +76,7 @@ struct MaxFlow{
                 res += cur;
             }
         }
-        return res;
+        return max_flow_res = res;
     }
     void dfs2(int u){
         vis[u] = true;
@@ -86,6 +87,7 @@ struct MaxFlow{
         }
     }
     vvl min_cut(int s, int t){
+        if (!max_flow_res) return {};
         vis.resize(n, false);
         dfs2(s);
         vvl res;
