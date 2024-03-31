@@ -1,3 +1,15 @@
+/*
+
+Works for both directed and undirected graph
+min_cut : returns {u, v, flow}
+call max_flow() before calling mincut
+
+can find edges in mincut, max_flow
+
+Time Complexity : O(V * V * E)
+
+*/
+
 struct MaxFlow{
     enum e_type{
         directional,
