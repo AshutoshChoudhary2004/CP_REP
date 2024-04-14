@@ -39,7 +39,7 @@ void take_contribution_from_superset(vl &dp){
 }
 void remove_contribution_from_superset(vl &dp){
     fr(bit, max_log){
-        fr(max_n){
+        fr(i, max_n){
             if (i & (1 << bit)){
                 dp[i ^ (1 << bit)] -= dp[i];
             }
