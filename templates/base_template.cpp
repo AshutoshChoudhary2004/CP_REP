@@ -3,6 +3,7 @@ using namespace std;
 
 #define ll long long
 #define mod 1000000007
+#define mod2 998244353
 #define all(a) a.begin(), a.end()
 #define pb push_back
 #define ins insert
