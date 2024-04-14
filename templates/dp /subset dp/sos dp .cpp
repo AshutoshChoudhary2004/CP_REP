@@ -3,7 +3,7 @@
 f(x) : count something from all subsets of x
 time complexity to find f(x) for all nubmers upto n : O(NLogN)
 
-max_log = ceil(log2(max_value))
+max_log = ceil(log2(max_value)) + 1
 
 */
 
