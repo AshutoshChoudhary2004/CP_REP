@@ -1,3 +1,12 @@
+/*
+
+f(x) : count something from all subsets of x
+time complexity to find f(x) for all nubmers upto n : O(NLogN)
+
+max_log = ceil(log2(max_value))
+
+*/
+
 const ll max_log = 20;
 const ll max_n = 1 << max_log;
 
