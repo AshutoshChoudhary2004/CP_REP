@@ -5,6 +5,11 @@ time complexity to find f(x) for all nubmers upto n : O(NLogN)
 
 max_log = ceil(log2(max_value)) + 1
 
+applications : 
+
+1) we want to count how many subsets/supersets of x, exist in an array 
+
+
 */
 
 const ll max_log = 20;
