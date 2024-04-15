@@ -10,6 +10,7 @@ max_log = ceil(log2(max_value)) + 1
 const ll max_log = 20;
 const ll max_n = 1 << max_log;
 
+//count subset : count how many subset's of x exist in array
 void take_contribution_from_subset(vl &dp){
     fr(bit, max_log){
         fr(i, max_n){
@@ -28,6 +29,7 @@ void remove_contribution_from_subset(vl &dp){
         }
     }
 }
+//count superset : count how many superset's of x exist in array
 void take_contribution_from_superset(vl &dp){
     fr(bit, max_log){
         for (int i = max_n - 1; i >= 0; -- i){
