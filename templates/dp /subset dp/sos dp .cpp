@@ -22,7 +22,7 @@ max_log = ceil(log2(max_value)) + 1
 
 */
 
-const ll max_log = 21;
+const ll max_log = 20;
 const ll max_n = 1 << max_log;
 
 //count subset : count how many subset's of x exist in array
