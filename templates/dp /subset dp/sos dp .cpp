@@ -49,6 +49,12 @@ max_log = ceil(log2(max_value)) + 1
 
     if we want for superset of x, we can calculate for subset of x, then convert to exactly x, then convert to superset of x
     if we want for subset of x, we can calculate for superset of x, then convert to exactly x, then convert to subset of x
+
+9) if we have array, and for each x we have to count the number of subsets / supersets (formed by the elements of the array)    
+    we generally first fill dp[i] with count of each element of array, but doing just that wont work, as dp[i] is just storing the count of x
+    for each x, but we want count of subset / superset that form x, so we will run take_contribution_from_subset/superset so that dp[i] stores
+    count of all elements whose subset will form x (or subset of x, or superset of x), after calling take_contribute function, we will change
+    dp[i] to 1 << dp[i] for all i
 */
 
 const ll max_log = 20;
