@@ -23,6 +23,17 @@ max_log = ceil(log2(max_value)) + 1
     basically what is happening, instead of iterating on all values of array we are iterating on all subsets of x, then incrementing count, 
     and we do this in sos dp in such a way such that we dont overcount
 
+7) if we have any one of these : 
+
+    - count / ans that form exactly me OR count / ans for exactly me
+    - count / ans that form my subset OR count / ans for my subset
+    - count / ans that form my superset OR count / ans for my superset
+
+    then we can get any of above
+
+    If we have count / ans that form exactly me, then we can get count / ans that form my subset / superset
+    If we have count / ans that form my subset / superset, then we can get count / ans that form exactly me
+
 */
 
 const ll max_log = 20;
