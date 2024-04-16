@@ -44,6 +44,8 @@ max_log = ceil(log2(max_value)) + 1
     each x such that dp[x] contains count for each x that form exactly x using sos dp, we dont need to explicitly calculate / apply logic to get 
     answer for exactly x, we can use sos dp for that
 
+    if we want for superset of x, we can calculate for subset of x, then convert to exactly x, then convert to superset of x
+    if we want for subset of x, we can calculate for superset of x, then convert to exactly x, then convert to subset of x
 */
 
 const ll max_log = 20;
