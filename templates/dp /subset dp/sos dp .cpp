@@ -23,7 +23,10 @@ max_log = ceil(log2(max_value)) + 1
     basically what is happening, instead of iterating on all values of array we are iterating on all subsets of x, then incrementing count, 
     and we do this in sos dp in such a way such that we dont overcount
 
-7) if we have any one of these : 
+7) if we have dp[x] ans that form exactly x, then we can use take contribution so that dp[x] changes to dp[x] that form superset / subset of x
+    and we dont need to worry about overcounting
+
+8) if we have any one of these : 
 
     - count / ans that form exactly me OR count / ans for exactly me
     - count / ans that form my subset OR count / ans for my subset
