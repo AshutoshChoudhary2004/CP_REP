@@ -34,6 +34,16 @@ max_log = ceil(log2(max_value)) + 1
     If we have count / ans that form exactly me, then we can get count / ans that form my subset / superset
     If we have count / ans that form my subset / superset, then we can get count / ans that form exactly me
 
+    for example for each x if we want to count / calculate / ans that form supserset / subset of x, then we can
+    just calculate ans for x such that dp[x] contains ans / count that form exactly x, now we can convert this answer
+    such that dp[x] contains count for each x that form supserset / subset of x using sos dp, we dont need to explicitly calculate / apply 
+    logic to get answer for superset / subset of x, we can use sos dp for that
+
+    same vice versa, if we want to count / calculate / ans that form exactly x, then we can just calcuate ans for x such 
+    dp[x] contains count / ans that form superset / subset of x, now we can convert this answer such that dp[x] contains count for 
+    each x such that dp[x] contains count for each x that form exactly x using sos dp, we dont need to explicitly calculate / apply logic to get 
+    answer for exactly x, we can use sos dp for that
+
 */
 
 const ll max_log = 20;
