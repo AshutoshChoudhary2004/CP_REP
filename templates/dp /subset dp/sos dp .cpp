@@ -19,6 +19,9 @@ max_log = ceil(log2(max_value)) + 1
     
 5) remove_contribution_from_subset/supserset are undo operations of take contributions from subset/superset
 
+6) if we want to count how many values in the array are subset of x, then we can store cnt in dp, then use take contribution from subset
+    basically what is happening, instead of iterating on all values of array we are iterating on all subsets of x, then incrementing count, 
+    and we do this in sos dp in such a way such that we dont overcount
 
 */
 
