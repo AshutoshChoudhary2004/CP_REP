@@ -1,3 +1,12 @@
+/*
+
+1) use init function to specify the total number of nodes
+2) use add_edge function to add edges 
+
+get_mst() returns {total weight of mst, edges in the mst}
+
+*/
+
 struct MST{
 
     int n;
