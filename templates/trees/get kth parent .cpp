@@ -3,7 +3,6 @@ struct Tree{
     int n, logn;
     vvi g;
     vvi p;
-    vi level;
     bool dfs_done;
 
     void init(int _n){
