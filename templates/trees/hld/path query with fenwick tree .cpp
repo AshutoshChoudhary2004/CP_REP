@@ -1,3 +1,9 @@
+/*
+call start_dfs to initialize, and call this after adding all the edges
+To change : 
+    - change addition in fenwick tree
+    - 108, 111, 115
+*/
 struct FenwickTree{
     int n;
     vl b1, b2;
