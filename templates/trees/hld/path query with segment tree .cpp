@@ -1,3 +1,15 @@
+/*
+- call start_dfs to intialize, call this after adding all edges
+This code calculates max, to calculate max, sum or any other thing
+just change : 
+    - func on line 16
+    - default value on line 13
+    - and if you want sum then multiply by (high - low + 1) on line 31
+
+changes needed to be done in Tree struct: 
+    line 141, 144, 148
+*/
+
 struct SegmentTree{
     int n;
     vl seg;
