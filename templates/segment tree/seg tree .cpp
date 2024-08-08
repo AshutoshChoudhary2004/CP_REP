@@ -33,6 +33,7 @@ struct SegmentTree{
         int mid = (low + high) >> 1;
         return func(query(2 * ind + 1, low, mid, left, right), query(2 * ind + 2, mid + 1, high, left, right));
     }
+//adds x to the range does not set the value to x
     void update(int ind, int low, int high, int left, int right, ll x){
         set_lazy(ind, low, high, 0);
         if (low >= left && high <= right){
