@@ -137,7 +137,7 @@ struct Tree{
         dfs(0, 0);
     }
 
-    ll path_query(int u, int v){
+    ll query_path(int u, int v){
         ll res = -(ll)(1e18);
         while (chain[u] != chain[v]){
             if (level[chain[u]] < level[chain[v]]) swap(u, v);
