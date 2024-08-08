@@ -132,9 +132,9 @@ struct Tree{
         }
     }
 
-    void start_dfs(){
-        dfs(0);
-        dfs(0, 0);
+    void start_dfs(int u){
+        dfs(u);
+        dfs(u, u);
     }
 
     ll query_path(int u, int v){
