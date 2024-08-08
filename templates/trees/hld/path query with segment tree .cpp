@@ -2,23 +2,21 @@
 - call start_dfs to intialize, call this after adding all edges
 This code calculates max, to calculate max, sum or any other thing
 just change : 
-    - func on line 16
-    - default value on line 13
-    - and if you want sum then multiply by (high - low + 1) on line 31
-
-changes needed to be done in Tree struct: 
-    line 141, 144, 148
+    - func on line 12
+    - default value on line 9
 */
+
+ll default_value = -(ll)(1e18);
+
+ll func(ll x, ll y){
+    return max(x, y);
+}
 
 struct SegmentTree{
     int n;
     vl seg;
     vvl lazy;
-    ll default_value = -(ll)(1e18);
 
-    ll func(ll x, ll y){
-        return max(x, y);
-    }
     void init(int _n){
         n = _n;
         seg.resize(4 * n, 0); 
@@ -138,14 +136,14 @@ struct Tree{
     }
 
     ll query_path(int u, int v){
-        ll res = -(ll)(1e18);
+        ll res = default_value;
         while (chain[u] != chain[v]){
             if (level[chain[u]] < level[chain[v]]) swap(u, v);
-            res = max(res, tree.query(id[chain[u]], id[u]));
+            res = func(res, tree.query(id[chain[u]], id[u]));
             u = par[chain[u]];
         }
         if (level[u] > level[v]) swap(u, v);
-        return max(res, tree.query(id[u], id[v]));
+        return func(res, tree.query(id[u], id[v]));
     }
 
     void update_path(int u, int v, ll x){
