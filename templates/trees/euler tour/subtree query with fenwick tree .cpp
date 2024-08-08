@@ -1,3 +1,4 @@
+//code is written for addition
 struct FenwickTree{
     int n;
     vl b1, b2;
@@ -66,6 +67,7 @@ struct Tree{
         tree.update(start[u] + 1, finish[u] + 1, x);
     }
     void update_node(int u, ll x){
+        //adds x to the node u, does not set the value of u to x
         tree.update(start[u] + 1, start[u] + 1, x);
     }
     ll query_node(int u){
