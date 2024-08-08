@@ -1,8 +1,17 @@
+/*
+This code calculates min, to calculate max, sum or any other thing
+just change the fun on line 12
+and change the deafult value on line 10
+*/
 struct SegmentTree{
     int n;
     vl seg;
     vl lazy;
-    ll inf = (ll)(1e18);
+    ll default_value = (ll)(1e18);
+
+    ll func(ll x, ll y){
+        return min(x, y);
+    }
     void init(int _n){
         n = _n;
         seg.resize(4 * n, 0); 
@@ -20,9 +29,9 @@ struct SegmentTree{
     ll query(int ind, int low, int high, int left, int right){
         set_lazy(ind, low, high, 0);
         if (low >= left && high <= right) return seg[ind];
-        if (high < left || low > right) return -inf;
+        if (high < left || low > right) return default_value;
         int mid = (low + high) >> 1;
-        return max(query(2 * ind + 1, low, mid, left, right), query(2 * ind + 2, mid + 1, high, left, right));
+        return func(query(2 * ind + 1, low, mid, left, right), query(2 * ind + 2, mid + 1, high, left, right));
     }
     void update(int ind, int low, int high, int left, int right, ll x){
         set_lazy(ind, low, high, 0);
@@ -33,7 +42,7 @@ struct SegmentTree{
         int mid = (low + high) >> 1;
         update(2 * ind + 1, low, mid, left, right, x);
         update(2 * ind + 2, mid + 1, high, left, right, x);
-        seg[ind] = max(seg[2 * ind + 1], seg[2 * ind + 2]);
+        seg[ind] = func(seg[2 * ind + 1], seg[2 * ind + 2]);
     }
 };
 
