@@ -1,8 +1,8 @@
 /*
 This code calculates min, to calculate max, sum or any other thing
 just change : 
-    - func on line 14
-    - default value on line 12
+    - func on line 16
+    - default value on line 13
     - and if you want sum then multiply by (high - low + 1) on line 31
 */
 
