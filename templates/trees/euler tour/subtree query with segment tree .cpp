@@ -1,3 +1,10 @@
+/*
+This code calculates min, to calculate max, sum or any other thing
+just change : 
+    - func on line 15
+    - default value on line 12
+    - and if you want sum then multiply by (high - low + 1) on line 30
+*/
 struct SegmentTree{
     int n;
     vl seg;
