@@ -62,11 +62,13 @@ struct Tree{
         }
         finish[u] = cnt;
     }
+    void start_dfs(int u){
+        dfs(u, -1);
+    }
     void update_subtree(int u, ll x){
         tree.update(start[u] + 1, finish[u] + 1, x);
     }
     void update_node(int u, ll x){
-        //adds x to the node u, does not set the value of u to x
         tree.update(start[u] + 1, start[u] + 1, x);
     }
     ll query_node(int u){
@@ -74,5 +76,8 @@ struct Tree{
     }
     ll query_subtree(int u){
         return tree.query(start[u] + 1, finish[u] + 1);
+    }
+    void set_value_node(int u, ll x){
+        update_node(u, x - query_node(u));
     }
 };
