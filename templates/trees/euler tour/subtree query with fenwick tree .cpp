@@ -1,4 +1,3 @@
-//code is written for addition
 struct FenwickTree{
     int n;
     vl b1, b2;
