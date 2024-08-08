@@ -1,3 +1,8 @@
+/*
+this code is for max, to change:
+  change func on line 7
+  change default value on line 9
+*/
 ll func(ll a, ll b){
     return max(a, b);
 }
