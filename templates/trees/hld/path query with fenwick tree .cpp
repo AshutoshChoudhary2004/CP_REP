@@ -113,7 +113,7 @@ struct Tree{
         ll res = 0;
         while (chain[u] != chain[v]){
             if (level[chain[u]] < level[chain[v]]) swap(u, v);
-            res += tree.query(id[chain[u]], id[u];
+            res += tree.query(id[chain[u]], id[u]);
             u = par[chain[u]];
         }
         if (level[u] > level[v]) swap(u, v);
