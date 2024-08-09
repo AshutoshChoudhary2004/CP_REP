@@ -13,6 +13,8 @@ struct FenwickTree{
         }
     }
     void update(int l, int r, ll x){
+        l += 1;
+        r += 1;
         point_update(l, x, b1);
         point_update(r + 1, -x, b1);
         point_update(l, x * (l - 1), b2);
@@ -29,7 +31,10 @@ struct FenwickTree{
         return sum(idx, b1) * idx - sum(idx, b2);
     }
     ll query(int l, int r){
-        return prefix_sum(r) - prefix_sum(l - 1);
+        return prefix_sum(r + 1) - prefix_sum(l - 1 + 1);
+    }
+    void set_value(int idx, ll val){
+        update(idx, idx, val - query(idx, idx));
     }
 };
 
@@ -78,6 +83,6 @@ struct Tree{
         return tree.query(start[u], finish[u]);
     }
     void set_value_node(int u, ll x){
-        update_node(u, x - query_node(u));
+        return tree.set_value(start[u], x);
     }
 };
