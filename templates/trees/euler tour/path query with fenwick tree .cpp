@@ -88,18 +88,18 @@ struct Tree{
         }
     }
     void update_node(int u, ll x){
-        tree.update(start[u] + 1, x);
-        tree.update(finish[u] + 1, - x);
+        tree.update(start[u], x);
+        tree.update(finish[u], - x);
     }
     void set_value_node(int u, ll x){
-        tree.set_value(start[u] + 1, x);
-        tree.set_value(finish[u] + 1, -x);
+        tree.set_value(start[u], x);
+        tree.set_value(finish[u], -x);
     }
     ll query_path(int u, int v){
         int par = lca(u, v);
-        ll val1 = tree.query(start[0] + 1, start[u] + 1);
-        ll val2 = tree.query(start[0] + 1, start[v] + 1);
-        ll val3 = tree.query(start[0] + 1, start[par] + 1); 
-        return val1 + val2 - 2 * val3 + tree.query(start[par] + 1, start[par] + 1);
+        ll val1 = tree.query(start[0], start[u]);
+        ll val2 = tree.query(start[0] , start[v]);
+        ll val3 = tree.query(start[0], start[par]); 
+        return val1 + val2 - 2 * val3 + tree.query(start[par], start[par]);
     }
 };
