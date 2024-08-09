@@ -11,7 +11,7 @@ struct FenwickTree{
         b.resize(n + 1, 0);
     }
     void update(int idx, ll x){
-        for (int i = idx; i <= n; i += i & -i) b[i] += x;
+        for (int i = idx + 1; i <= n; i += i & -i) b[i] += x;
     }
     void set_value(int idx, ll x){
         update(idx, x - query(idx, idx));
@@ -22,7 +22,7 @@ struct FenwickTree{
         return res;
     }
     ll query(int l, int r){
-        return sum(r) - sum(l - 1);
+        return sum(r + 1) - sum(l - 1 + 1);
     }
 };
 
