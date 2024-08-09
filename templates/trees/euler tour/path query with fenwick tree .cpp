@@ -2,87 +2,6 @@
 call start_dfs() to initialize, and call this after adding all the edges
 */
 
-struct RMQ{
-
-    int n, logn;
-    vi a;
-    vvi m;
-    void build(){
-        fr(i, n) m[i][0] = i;
-        for (int bit = 1; bit < logn; ++ bit){
-            for (int i = 0; i + (1 << bit) - 1 < n; ++ i){
-                int idx1 = m[i][bit - 1];
-                int idx2 = m[i + (1 << (bit - 1))][bit - 1];
-                m[i][bit] = a[idx1] < a[idx2] ? idx1 : idx2;
-            }
-        }
-    }
-
-    void init(int _n, vi _a){
-        n = _n;
-        a = _a;
-        logn = ceil(log2(n)) + 1;
-        m.resize(n, vi(logn, 0));
-        build();
-    }
-
-    int query(int l, int r){
-        int len = r - l + 1;
-        int val = 31 - __builtin_clz(len);
-        int idx1 = m[l][val];
-        int idx2 = m[r - (1 << val) + 1][val];
-        return a[idx1] < a[idx2] ? idx1 : idx2; 
-    }
-};
-
-struct LCA{
-    int n;
-    vvi g;
-    vi id;
-    vi level;
-    vi m;
-    int cnt;
-    bool dfs_done;
-    RMQ rmq;
-    void init(int _n){
-        n = _n;
-        g.resize(n);
-        m.assign(2 * n - 1, 2 * n);
-        id.resize(2 * n - 1);
-        level.resize(2 * n - 1);
-        cnt = -1;
-        dfs_done = false;
-    }
-
-    void add_edge(int u, int v){
-        g[u].pb(v);
-        g[v].pb(u);
-    }
-
-    void dfs(int u, int p, int cur){
-        level[++ cnt] = cur;
-        id[cnt] = u;
-        m[u] = min(cnt, m[u]);
-        for (int v : g[u]){
-            if (v != p){
-                dfs(v, u, cur + 1);
-                id[++ cnt] = u;
-                level[cnt] = cur;
-            }
-        }
-    }
-    
-    int lca(int u, int v){
-        if (!dfs_done){
-            dfs(0, -1, 0);
-            dfs_done = true;
-            rmq.init(2 * n - 1, level);
-        }
-        if (m[u] > m[v]) swap(u, v);
-        return id[rmq.query(m[u], m[v])];
-    }
-};
-
 struct FenwickTree{
     int n;
     vl b;
@@ -114,33 +33,59 @@ struct Tree{
     vi finish;
     int cnt;
     FenwickTree tree;
-    LCA tree_lca;
+    vi level;
+    vvi p;
+    int logn;
 
     void init(int _n){
         n = _n;
         g.resize(n);
         tree.init(2 * n); 
-        tree_lca.init(n);
         start.resize(n, 0);
         finish.resize(n, 0);
+        level.resize(n, 0);
+        logn = ceil(log2(n)) + 1;
+        p.assign(n, vi(logn, -1));
         cnt = -1;
     }   
     void add_edge(int u, int v){
         g[u].pb(v);
         g[v].pb(u);
-        tree_lca.add_edge(u, v);
     }
-    void dfs(int u, int p){
+    void dfs(int u){
         start[u] = ++ cnt;
         for (int v : g[u]){
-            if (v != p){
-                dfs(v, u);
+            if (v != p[u][0]){
+                level[v] = level[u] + 1;
+                p[v][0] = u;
+                dfs(v);
             }
         }
         finish[u] = ++ cnt;
     }
-    void start_dfs(int u){
-        dfs(u, -1);
+    int lca(int u, int v){
+        if (level[u] < level[v]) swap(u, v);
+        int dif = level[u] - level[v];
+        fr(i, logn){
+            if (dif & (1 << i)) u = p[u][i];
+        }
+        if (u == v) return u;
+        for (int i = logn - 1; i >= 0; -- i){
+            if (p[u][i] != p[v][i]){
+                u = p[u][i];
+                v = p[v][i];
+            }
+        }
+        return p[u][0];
+    }
+    void start_dfs(int x){
+        dfs(x);
+        for (int i = 1; i < logn; ++ i){
+            fr(u, n){
+                int par = p[u][i - 1];
+                p[u][i] = par != -1 ? p[par][i - 1] : -1;
+            }
+        }
     }
     void update_node(int u, ll x){
         tree.update(start[u] + 1, x);
@@ -151,10 +96,10 @@ struct Tree{
         tree.set_value(finish[u] + 1, -x);
     }
     ll query_path(int u, int v){
-        int lca = tree_lca.lca(u, v);
+        int par = lca(u, v);
         ll val1 = tree.query(start[0] + 1, start[u] + 1);
         ll val2 = tree.query(start[0] + 1, start[v] + 1);
-        ll val3 = tree.query(start[0] + 1, start[lca] + 1); 
-        return val1 + val2 - 2 * val3 + tree.query(start[lca] + 1, start[lca] + 1);
+        ll val3 = tree.query(start[0] + 1, start[par] + 1); 
+        return val1 + val2 - 2 * val3 + tree.query(start[par] + 1, start[par] + 1);
     }
 };
