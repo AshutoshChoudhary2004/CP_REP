@@ -10,11 +10,11 @@ struct FenwickTree{
         for (int i = idx + 1; i <= n; i += i & -i) b[i] += x;
     }
     void set_value(int idx, ll x){
-        update(idx + 1, x - query(idx + 1, idx + 1));
+        update(idx, x - query(idx, idx));
     }
     ll sum(int idx){
         ll res = 0;
-        for (int i = idx + 1; i > 0; i -= i & -i) res += b[i];
+        for (int i = idx; i > 0; i -= i & -i) res += b[i];
         return res;
     }
     ll query(int l, int r){
