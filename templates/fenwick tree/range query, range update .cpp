@@ -31,4 +31,7 @@ struct FenwickTree{
     ll query(int l, int r){
         return prefix_sum(r) - prefix_sum(l - 1);
     }
+    void set_value(int idx, ll val){
+        update(idx, idx, val - query(idx, idx));
+    }
 };
