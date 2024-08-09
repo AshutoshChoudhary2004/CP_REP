@@ -23,4 +23,7 @@ struct FenwickTree{
         }
         return res;
     }
+    void set_value(int idx, ll val){
+        update(idx, idx, val - query(idx));
+    }
 };
