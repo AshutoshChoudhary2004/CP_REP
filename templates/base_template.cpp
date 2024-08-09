@@ -3,7 +3,7 @@ using namespace std;
 
 const int mod = 1000000007;
 const int mod2 = 998244353;
-#define mod2 998244353
+#define ll long long
 #define all(a) a.begin(), a.end()
 #define pb push_back
 #define ins insert
