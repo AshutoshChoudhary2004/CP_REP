@@ -66,16 +66,16 @@ struct Tree{
         dfs(u, -1);
     }
     void update_subtree(int u, ll x){
-        tree.update(start[u] + 1, finish[u] + 1, x);
+        tree.update(start[u], finish[u], x);
     }
     void update_node(int u, ll x){
-        tree.update(start[u] + 1, start[u] + 1, x);
+        tree.update(start[u], start[u], x);
     }
     ll query_node(int u){
-        return tree.query(start[u] + 1, start[u] + 1);
+        return tree.query(start[u], start[u]);
     }
     ll query_subtree(int u){
-        return tree.query(start[u] + 1, finish[u] + 1);
+        return tree.query(start[u], finish[u]);
     }
     void set_value_node(int u, ll x){
         update_node(u, x - query_node(u));
