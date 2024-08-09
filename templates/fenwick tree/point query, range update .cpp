@@ -8,7 +8,7 @@ struct FenwickTree{
         b.resize(n + 1, 0);
     }
     void point_update(int ind, ll val){
-        for (int i = ind + 1; i <= n; i += i & -i){
+        for (int i = ind; i <= n; i += i & -i){
             b[i] += val;
         }
     }
@@ -24,6 +24,6 @@ struct FenwickTree{
         return res;
     }
     void set_value(int idx, ll val){
-        update(idx + 1, idx + 1, val - query(idx));
+        update(idx, idx, val - query(idx));
     }
 };
