@@ -1,14 +1,3 @@
-/***
- *
- * 64-bit hashing for vectors or strings
- * Get the forward and reverse hash of any segment
- * Base is chosen randomly to prevent anti-hash cases from being constructed
- * 
- * Complexity - O(n) to build, O(1) for each hash query
- *
-***/
-
-
 #define MAXLEN 1000010
 
 constexpr uint64_t MOD = (1ULL << 61) - 1;
