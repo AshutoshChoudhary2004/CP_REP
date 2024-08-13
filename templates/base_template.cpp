@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int mod = 1000000007;
-const int mod2 = 998244353;
+constexpr int mod = 1000000007;
+constexpr int mod2 = 998244353;
 mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 
 #define ll long long
