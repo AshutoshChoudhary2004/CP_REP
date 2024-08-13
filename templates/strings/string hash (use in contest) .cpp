@@ -62,7 +62,7 @@ struct PolyHash{
         return h < 0 ? h + MOD : h;
     }
 
-    uint64_t rev_hash(int l, int r){
+    uint64_t get_rev_hash(int l, int r){
         int64_t h = suff[l + 1] - modmul(base_pow[r - l + 1], suff[r + 2]);
         return h < 0 ? h + MOD : h;
     }
