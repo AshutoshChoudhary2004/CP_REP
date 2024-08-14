@@ -1,9 +1,7 @@
 #define MAXLEN 1000010
 
 constexpr uint64_t MOD = (1ULL << 61) - 1;
-
-const uint64_t seed = chrono::system_clock::now().time_since_epoch().count();
-const uint64_t base = mt19937_64(seed)() % (MOD / 3) + (MOD / 3);
+const uint64_t base = rng() % (MOD / 3) + (MOD / 3);
 
 uint64_t base_pow[MAXLEN];
 
