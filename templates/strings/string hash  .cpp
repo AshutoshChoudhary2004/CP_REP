@@ -47,12 +47,12 @@ struct StringHash{
 };
 
 int main(){
-    StringHash H;
-    H.init("racecar");
-    assert(H.get_hash(0, 6) == H.rev_hash(0, 6));
-    assert(H.get_hash(1, 5) != H.rev_hash(0, 4));
-    assert(H.get_hash(1, 1) == H.rev_hash(5, 5));
-    assert(H.get_hash(1, 1) != H.rev_hash(5, 6));
-    assert(H.get_hash(2, 4) == H.rev_hash(2, 4));
+    StringHash hash;
+    hash.init("racecar");
+    assert(hash.get_hash(0, 6) == hash.rev_hash(0, 6));
+    assert(hash.get_hash(1, 5) != hash.rev_hash(0, 4));
+    assert(hash.get_hash(1, 1) == hash.rev_hash(5, 5));
+    assert(hash.get_hash(1, 1) != hash.rev_hash(5, 6));
+    assert(hash.get_hash(2, 4) == hash.rev_hash(2, 4));
     return 0;
 }
