@@ -40,6 +40,10 @@ struct StringHash{
         int64_t res = p[r] - modmul(l ? p[l - 1] : 0, base_pow[r - l + 1]);
         return res < 0 ? res + MOD : res; 
     }
+    uint64_t get_rev_hash(int l, int r){
+        int64_t res = s[l] - modmul(r != n - 1 ? s[r + 1] : 0, base_pow[r - l + 1]);
+        return res < 0 ? res + MOD : res;
+    }
 };
 
 int main(){
