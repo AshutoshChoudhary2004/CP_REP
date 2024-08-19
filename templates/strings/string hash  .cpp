@@ -1,62 +1,49 @@
-#define MAXLEN 1000010
-
 constexpr uint64_t MOD = (1ULL << 61) - 1;
-const uint64_t base = rng() % (MOD / 3) + (MOD / 3);
-
-uint64_t base_pow[MAXLEN];
+const uint64_t base = rng() % (MOD / 3) + MOD / 3;
+constexpr int N = 2e5 + 10;
+uint64_t base_pow[N];
 
 int64_t modmul(uint64_t a, uint64_t b){
-    uint64_t l1 = (uint32_t)a, h1 = a >> 32, l2 = (uint32_t)b, h2 = b >> 32;
-    uint64_t l = l1 * l2, m = l1 * h2 + l2 * h1, h = h1 * h2;
-    uint64_t ret = (l & MOD) + (l >> 61) + (h << 3) + (m >> 29) + (m << 35 >> 3) + 1;
-    ret = (ret & MOD) + (ret >> 61);
-    ret = (ret & MOD) + (ret >> 61);
-    return ret - 1;
+    uint64_t l1 = (uint32_t)a, l2 = (uint32_t)b, h1 = a >> 32, h2 = b >> 32;
+    uint64_t l = l1 * l2, m = l1 * h2 + h1 * l2, h = h1 * h2;
+    uint64_t res = (l & MOD) + (l >> 61) + (h << 3) + (m >> 29) + (m << 35 >> 3) + 1;
+    res = (res & MOD) + (res >> 61);
+    res = (res & MOD) + (res >> 61);
+    return res - 1;
 }
 
 void calculate_power(){
     base_pow[0] = 1;
-    for (int i = 1; i < MAXLEN; i++){
+    for (int i = 1; i < N; ++ i){
         base_pow[i] = modmul(base_pow[i - 1], base);
     }
 }
 
-struct PolyHash{
-    /// Remove suff vector and usage if reverse hash is not required for more speed
-    vector<int64_t> pref, suff;
-
-
-    void init(string s){
+struct StringHash{
+    int n;
+    vector<int64_t> p, s;
+    void init(string str){
         if (!base_pow[0]) calculate_power();
-
-        int n = s.size();
-        assert(n < MAXLEN);
-        pref.resize(n + 3, 0), suff.resize(n + 3, 0);
-
-        for (int i = 1; i <= n; i++){
-            pref[i] = modmul(pref[i - 1], base) + s[i - 1] + 997;
-            if (pref[i] >= MOD) pref[i] -= MOD;
+        n = str.size();
+        p.resize(n, 0);
+        s.resize(n, 0);
+        for (int i = 0; i < n; ++ i){
+            p[i] = modmul(i ? p[i - 1] : 0, base) + str[i] + 997;
+            if (p[i] >= MOD) p[i] -= MOD;
         }
-
-        for (int i = n; i >= 1; i--){
-            suff[i] = modmul(suff[i + 1], base) + s[i - 1] + 997;
-            if (suff[i] >= MOD) suff[i] -= MOD;
+        for (int i = n - 1; i >= 0; -- i){
+            s[i] = modmul(i != n - 1 ? s[i + 1] : 0, base) + str[i] + 997;
+            if (s[i] >= MOD) s[i] -= MOD;
         }
     }
-
     uint64_t get_hash(int l, int r){
-        int64_t h = pref[r + 1] - modmul(base_pow[r - l + 1], pref[l]);
-        return h < 0 ? h + MOD : h;
-    }
-
-    uint64_t get_rev_hash(int l, int r){
-        int64_t h = suff[l + 1] - modmul(base_pow[r - l + 1], suff[r + 2]);
-        return h < 0 ? h + MOD : h;
+        int64_t res = p[r] - modmul(l ? p[l - 1] : 0, base_pow[r - l + 1]);
+        return res < 0 ? res + MOD : res; 
     }
 };
 
 int main(){
-    PolyHash H;
+    StringHash H;
     H.init("racecar");
     assert(H.get_hash(0, 6) == H.rev_hash(0, 6));
     assert(H.get_hash(1, 5) != H.rev_hash(0, 4));
