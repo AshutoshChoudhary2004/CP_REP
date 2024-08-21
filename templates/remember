@@ -1,5 +1,10 @@
-- Dont just stick on one approach, if this approach is not working try some another approach
-- If we know how will we get the ansewr, but we cannot use this approach to get / find this answer, then observe the answer, try to find what properties does the ansewr have,
-  and use those properties to find another way to get the answer
 - Dont put hand on your hand and go blank, instead try to analyze the question, analyze the information we have, always some (definite - concrete - actual) thoughts
   should be in your head
+
+- Dont just stick on one approach, if this approach is not working try some another approach
+
+- If we know how will we get the ansewr, but we cannot use this approach to get / find this answer, then observe the answer, try to find what properties does the ansewr have,
+  and use those properties to find another way to get the answer
+
+- Try to think opposite of the condition for answer, e.g : condition is for every k consecutive elements there should be atleast one element in these k elements that 
+  is in my set, think opposite of this : longest consecutive block of elements such that there is no element of this block in my set, should be less than k
