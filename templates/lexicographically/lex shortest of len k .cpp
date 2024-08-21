@@ -1,3 +1,12 @@
+/*
+
+Works for both array and string
+
+Functions : 
+  - get lexicographically shortest string of len exactly k
+  - get lexicographically shortest string of len atleast k
+*/
+
 template <typename T>
 struct Lexi {
     int n, k;
