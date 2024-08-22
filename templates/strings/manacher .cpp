@@ -29,7 +29,7 @@ struct Manacher{
         return p[i] - 1;
     }
     bool is_palindrome(int l, int r){
-        return get_longest((l + r + 1) / 2, l % 2 != r % 2) >= r - l + 1;
+        return get_longest_palindrome((l + r + 1) / 2, l % 2 != r % 2) >= r - l + 1;
     }
 
     void init(string str){
