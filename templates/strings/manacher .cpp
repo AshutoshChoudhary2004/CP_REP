@@ -2,10 +2,14 @@
 
 - returns the length of longest palindrome with centre as x, (odd or even)
 - Can check if substring L .. R, is a palindrome or not
-- if even centre is not a palindrome then get longest palindrome will return 0
+- if even center is not a palindrome then get longest palindrome will return 0
+- to check for even centre i, i + 1 call get_longest_palindrome(i, i + 1)
+- to check for odd centre i call get_longest_palindrome(i, i)
   
 Preprocessing : O(N)
 Query : O(1)
+
+----------------------------------------------------------------------------------------------------
 
 Time Complexity Proof : 
 
@@ -25,36 +29,37 @@ else :
 */
 
 struct Manacher{
-    vi p;
-    string s;
     int n;
-    void run_manacher(){
-        int l = -1, r = 1;
+    string s;
+    vi p;
+    void build(){
+        int l = -1, r = -1;
+        p.resize(n, 0);
         fr(i, n){
-            p[i] = max(0, min(r - i, l + r - i >= 0 ? p[l + r - i] : 0));
-            while (i + p[i] < n && i - p[i] >= 0 && s[i - p[i]] == s[i + p[i]]) ++ p[i];
-            if (i + p[i] > r){
-                r = i + p[i];
-                l = i - p[i];
+            if (r >= i) p[i] = min(r - i + 1, p[l + r - i]);
+            while (i + p[i] < n && i - p[i] >= 0 && s[i + p[i]] == s[i - p[i]]) ++ p[i]; 
+            if (i + p[i] - 1 > r){
+                r = i + p[i] - 1;
+                l = i - p[i] + 1;
             }
         }
     }
-    // if want longset palindrome between i and i + 1, call get_longest(i + 1, true)
-    int get_longest_palindrome(int centre, bool is_even){
-        int i = 2 * centre + (!is_even);
-        return p[i] - 1;
-    }
-    bool is_palindrome(int l, int r){
-        return get_longest_palindrome((l + r + 1) / 2, l % 2 != r % 2) >= r - l + 1;
-    }
-
     void init(string str){
+        s = "";
         for (char it : str){
             s += string("#") + it;
         }
-        s += "#";
+        s += "#"; 
         n = si(s);
-        p.assign(n, 1);
-        run_manacher();
+        build();
+    }
+    int get_longest_palindrome(int l, int r){
+        int ind = 2 * l + 1 + (l != r);
+        return p[ind] - 1;
+    }
+    bool is_palindrome(int l, int r){
+        int x = (l + r) / 2;
+        int y = (r - l + 1) & 1 ? x : x + 1;
+        return get_longest_palindrome(x, y) >= r - l + 1;
     }
 };
