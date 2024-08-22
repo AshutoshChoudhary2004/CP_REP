@@ -24,7 +24,7 @@ struct Manacher{
         }
     }
     // if want longset palindrome between i and i + 1, call get_longest(i + 1, true)
-    int get_longest(int centre, bool is_even){
+    int get_longest_palindrome(int centre, bool is_even){
         int i = 2 * centre + (!is_even);
         return p[i] - 1;
     }
