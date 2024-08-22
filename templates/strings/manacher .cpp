@@ -9,6 +9,9 @@ Query : O(1)
 
 Time Complexity Proof : 
 
+we will always be on the right side of bounding box i.e (ind of current char will always be >= the mid point of bounding box)
+because bounding box increases equally over left and right
+
 if current character is in bounding box : 
 
     whenever we successfully expand the expansion starts from r, and r increases
