@@ -7,6 +7,11 @@
 Preprocessing : O(N)
 Query : O(1)
 
+Time Complexity Proof : 
+
+whenever we successfully expand the expansion starts from r, and r increases
+r can increase at max upto n therefore expnasion will be not more than n combined
+
 */
 
 struct Manacher{
