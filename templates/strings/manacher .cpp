@@ -2,6 +2,7 @@
 
 - returns the length of longest palindrome with centre as x, (odd or even)
 - Can check if substring L .. R, is a palindrome or not
+- if even centre is not a palindrome then get longest palindrome will return 0
   
 Preprocessing : O(N)
 Query : O(1)
