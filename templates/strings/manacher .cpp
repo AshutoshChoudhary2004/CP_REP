@@ -9,8 +9,15 @@ Query : O(1)
 
 Time Complexity Proof : 
 
-whenever we successfully expand the expansion starts from r, and r increases
-r can increase at max upto n therefore expnasion will be not more than n combined
+if current character is in bounding box : 
+
+    whenever we successfully expand the expansion starts from r, and r increases
+    r can increase at max upto n therefore expnasion will be not more than n combined
+
+else : 
+
+    for any character if it is outside bounding box then value of r will be i - 1, because previous character will be a palindrome of len 1
+    then in this case also r is expanding
 
 */
 
