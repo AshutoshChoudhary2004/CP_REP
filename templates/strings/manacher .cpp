@@ -17,6 +17,7 @@ we will always be on the right side of bounding box i.e (ind of current char wil
 because bounding box increases equally over left and right
 If we are at index i, and we are expanding idex i then it means index i is the mid point of this bounding box, therefore
 all the indexes ahead will be on the right side of the bounding box
+As much as 'r' is increasing, we are expanding that much.
 
 if current character is in bounding box : 
 
