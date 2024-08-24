@@ -49,7 +49,7 @@ struct Manacher{
     }
     void init(string str){
         s = "";
-        for (char it : str){
+        for (char &it : str){
             s += string("#") + it;
         }
         s += "#"; 
