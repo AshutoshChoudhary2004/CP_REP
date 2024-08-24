@@ -15,6 +15,8 @@ Time Complexity Proof :
 
 we will always be on the right side of bounding box i.e (ind of current char will always be >= the mid point of bounding box)
 because bounding box increases equally over left and right
+If we are at index i, and we are expanding idex i then it means index i is the mid point of this bounding box, therefore
+all the indexes ahead will be on the right side of the bounding box
 
 if current character is in bounding box : 
 
