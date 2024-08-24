@@ -24,7 +24,7 @@ if current character is in bounding box :
 else : 
 
     for any character if it is outside bounding box then value of r will be i - 1, because previous character will be a palindrome of len 1
-    then in this case also r is expanding
+    then in this case also r is expanding from i 
 
 */
 
