@@ -19,15 +19,21 @@ If we are at index i, and we are expanding idex i then it means index i is the m
 all the indexes ahead will be on the right side of the bounding box
 As much as 'r' is increasing, we are expanding that much.
 
+
 if current character is in bounding box : 
 
-    whenever we successfully expand the expansion starts from r, and r increases
+    whenever we successfully expand the expansion starts from r + 1, and r increases
     r can increase at max upto n therefore expnasion will be not more than n combined
 
 else : 
 
     for any character if it is outside bounding box then value of r will be i - 1, because previous character will be a palindrome of len 1
-    then in this case also r is expanding from i 
+    then in this case also expansino starts from r + 1
+
+therefore whenever expansion happens it starts from r + 1
+therefore whenever expansion happens r increases
+r only increases from 0 - n
+therefore the total combined expansion of all elemetns cant be more than n
 
 */
 
