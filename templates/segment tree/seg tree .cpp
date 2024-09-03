@@ -1,9 +1,9 @@
 /*
-Example given for range sum
+Example given for range min
 whatever is the deafult value, is the default value in seg tree
 if dont want that than use set_value to set value
 */
-template <typename T, T (*combine)(T, T), T default_value>
+template <typename T, T default_value, T (*combine)(T, T)>
 struct SegmentTree{
     int n;
     vector<T> seg;
@@ -39,10 +39,21 @@ struct SegmentTree{
     }
 };
 
-ll combine(ll x, ll y){return x + y;}
+ll combine(ll x, ll y){return min(x, y);}
 
-int main() {
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+ 
+    int n, q;
+    cin >> n >> q;
     
-    SegmentTree<ll , combine, 0LL> tree;
+    SegmentTree<ll, (ll)1e18, combine> tree;
     tree.init(n);
+
+    fr(i, n){
+        ll val;
+        cin >> val;
+        tree.set_value(i, val); 
+    }
 }
