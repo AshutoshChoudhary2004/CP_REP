@@ -1,69 +1,103 @@
-/*
-This code calculates min, to calculate max, sum or any other thing
-just change : 
-    - func on line 16
-    - default value on line 13
-    - and if you want sum then multiply by (high - low + 1) on line 31
-*/
 
+template <typename T, typename U, T default_value, U lazy_default_value, T (*combine)(T, T), U (*combine_lazy)(U, U), T (*add_lazy)(T, U, int, int)>
 struct SegmentTree{
     int n;
-    vl seg;
-    vvl lazy;
-    ll default_value = (ll)(1e18);
+    vector<T> seg;
+    vector<U> lazy;
+    vector<bool> lazy2;
 
-    ll func(ll x, ll y){
-        return min(x, y);
-    }
     void init(int _n){
         n = _n;
-        seg.resize(4 * n, 0); 
-        lazy.resize(4 * n, vl(2, 0));
+        seg.resize(4 * n, default_value); 
+        lazy.resize(4 * n, lazy_default_value);
+        lazy2.resize(4 * n, false);
     }
     void set_lazy(int ind, int low, int high){
-        if (lazy[ind][1]){
-            seg[ind] = lazy[ind][1] = 0;
+        if (lazy2[ind]){
+            seg[ind] = default_value;
+            lazy2[ind] = false;
             if (low != high){
-                lazy[2 * ind + 1][1] = lazy[2 * ind + 2][1] = true; 
-                lazy[2 * ind + 1][0] = lazy[2 * ind + 2][0] = 0;
+                lazy2[2 * ind + 1] = lazy2[2 * ind + 2] = true; 
+                lazy[2 * ind + 1] = lazy[2 * ind + 2] = lazy_default_value;
             }
         } 
-        seg[ind] += lazy[ind][0];
+        seg[ind] = add_lazy(seg[ind], lazy[ind], low, high);
         if (low != high){
-            lazy[2 * ind + 1][0] += lazy[ind][0];
-            lazy[2 * ind + 2][0] += lazy[ind][0];
+            lazy[2 * ind + 1] = combine_lazy(lazy[2 * ind + 1], lazy[ind]);
+            lazy[2 * ind + 2] = combine_lazy(lazy[2 * ind + 2], lazy[ind]);
         }
-       lazy[ind][0] = 0;
+       lazy[ind] = lazy_default_value;
     }
-    ll query(int ind, int low, int high, int left, int right){
+    T query(int ind, int low, int high, int left, int right){
         set_lazy(ind, low, high);
         if (low >= left && high <= right) return seg[ind];
         if (high < left || low > right) return default_value;
         int mid = (low + high) >> 1;
-        return func(query(2 * ind + 1, low, mid, left, right), query(2 * ind + 2, mid + 1, high, left, right));
+        return combine(query(2 * ind + 1, low, mid, left, right), query(2 * ind + 2, mid + 1, high, left, right));
     }
-    void update(int ind, int low, int high, int left, int right, ll x, bool flag){
+    void update(int ind, int low, int high, int left, int right, U x, bool flag){
         set_lazy(ind, low, high);
         if (low >= left && high <= right){
-            lazy[ind][0] = x;
-            lazy[ind][1] = flag; 
+            lazy[ind] = x;
+            lazy2[ind] = flag; 
             return set_lazy(ind, low, high);
         }
         if (high < left || low > right) return;
         int mid = (low + high) >> 1;
         update(2 * ind + 1, low, mid, left, right, x, flag);
         update(2 * ind + 2, mid + 1, high, left, right, x, flag);
-        seg[ind] = func(seg[2 * ind + 1], seg[2 * ind + 2]);
+        seg[ind] = combine(seg[2 * ind + 1], seg[2 * ind + 2]);
     }
 
-    void update(int l, int r, ll val){
+    void update(int l, int r, U val){
         return update(0, 0, n - 1, l, r, val, false);
     }
-
-    void set_value(int l, int r, ll val){
+    void set_value(int l, int r, U val){
         return update(0, 0, n - 1, l, r, val, true);
     }
-    ll query(int l, int r){
+    T query(int l, int r){
         return query(0, 0, n - 1, l, r);
     }
 };
+
+ll combine(ll x, ll y){return x + y;}
+ll combine_lazy(ll x, ll y){return x + y;}
+ll add_lazy(ll x, ll y, int low, int high){return x + y * (high - low + 1);}   
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int n, q;
+    cin >> n >> q;
+    SegmentTree<ll, ll, 0LL, 0LL, combine, combine_lazy, add_lazy> tree;
+    tree.init(n);
+    fr(i, n){
+        ll val;
+        cin >> val;
+        tree.set_value(i, i, val); 
+    }
+    while (q --){
+        int t;
+        cin >> t;
+        if (t == 1){
+            int l, r;
+            cin >> l >> r;
+            ll x;
+            cin >> x;
+           tree.update(l - 1, r - 1, x);
+        }
+        if (t == 2){
+            int l, r;
+            cin >> l >> r;
+            ll x;
+            cin >> x;
+            tree.set_value(l - 1, r - 1, x);
+        }
+        if (t == 3){
+            int l, r;
+            cin >> l >> r;
+            cout << tree.query(l - 1, r - 1) << "\n";
+        }
+    }
+}
