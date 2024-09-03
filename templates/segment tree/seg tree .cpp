@@ -1,5 +1,7 @@
 /*
 Example given for range sum
+whatever is the deafult value, is the default value in seg tree
+if dont want that than use set_value to set value
 */
 template <typename T, T (*combine)(T, T), T default_value>
 struct SegmentTree{
