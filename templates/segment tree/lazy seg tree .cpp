@@ -1,5 +1,7 @@
 /*
-Example for range sum given
+Example for range min
+whatever is the deafult value, is the default value in seg tree
+if dont want that than use set_value to set value
 */
 template <typename T, typename U, T default_value, U lazy_default_value, T (*combine)(T, T), U (*combine_lazy)(U, U), T (*add_lazy)(T, U, int, int)>
 struct SegmentTree{
@@ -64,30 +66,24 @@ struct SegmentTree{
     }
 };
 
-ll combine(ll x, ll y){return x + y;}
+ll combine(ll x, ll y){return min(x,  y);}
 ll combine_lazy(ll x, ll y){return x + y;}
-ll add_lazy(ll x, ll y, int low, int high){return x + y * (high - low + 1);}
-int main() {
+ll add_lazy(ll x, ll y, int low, int high){return x + y;}
 
-    int t;
-    cin >> t;
-    while (t --){
-        int n, q;
-        cin >> n >> q;
-        SegmentTree<ll, ll, 0LL, 0LL, combine, combine_lazy, add_lazy> tree;
-        tree.init(n);
-        while (q --){
-            int t;
-            cin >> t;
-            int l, r;
-            cin >> l >> r;
-            -- l, -- r;
-            if (t) cout << tree.query(l, r) << "\n";
-            else{
-                int x;
-                cin >> x;
-                tree.update(l, r, x);
-            } 
-        }
-    }
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    SegmentTree<ll, ll, (ll)(1e18), 0LL, combine, combine_lazy, add_lazy> tree;
+   
+    int n;
+    cin >> n;
+    tree.init(n);
+
+    for (int i = 0; i < n; ++ i){
+        int a;
+        cin >> a;
+        tree.set_value(i, a);
+    } 
+
 }
