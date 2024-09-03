@@ -1,62 +1,93 @@
 /*
-This code calculates min, to calculate max, sum or any other thing
-just change : 
-    - func on line 16
-    - default value on line 13
-    - and if you want sum then multiply by (high - low + 1) on line 29
+Example for range sum given
 */
-
+template <typename T, typename U, T default_value, U lazy_default_value, T (*combine)(T, T), U (*combine_lazy)(U, U), T (*add_lazy)(T, U, int, int)>
 struct SegmentTree{
     int n;
-    vl seg;
-    vl lazy;
-    ll default_value = (ll)(1e18);
+    vector<T> seg;
+    vector<U> lazy;
 
-    ll func(ll x, ll y){
-        return min(x, y);
-    }
     void init(int _n){
         n = _n;
-        seg.resize(4 * n, 0); 
-        lazy.resize(4 * n, 0);
+        seg.resize(4 * n, default_value); 
+        lazy.resize(4 * n, lazy_default_value);
     }
-    void set_lazy(int ind, int low, int high, ll val){
-        lazy[ind] += val; 
-        if (low != high){
-            lazy[2 * ind + 1] += lazy[ind];
-            lazy[2 * ind + 2] += lazy[ind];
-        }
-        seg[ind] += lazy[ind];
-        lazy[ind] = 0;
-    }
-    ll query(int ind, int low, int high, int left, int right){
-        set_lazy(ind, low, high, 0);
+    T query(int ind, int low, int high, int left, int right){
+        set_lazy(ind, low, high, lazy_default_value);
         if (low >= left && high <= right) return seg[ind];
         if (high < left || low > right) return default_value;
         int mid = (low + high) >> 1;
-        return func(query(2 * ind + 1, low, mid, left, right), query(2 * ind + 2, mid + 1, high, left, right));
+        return combine(query(2 * ind + 1, low, mid, left, right), query(2 * ind + 2, mid + 1, high, left, right));
     }
-    void update(int ind, int low, int high, int left, int right, ll x){
-        set_lazy(ind, low, high, 0);
+    void set_lazy(int ind, int low, int high, U val){
+        lazy[ind] = combine_lazy(lazy[ind], val);
+        if (low != high){
+            lazy[2 * ind + 1] = combine_lazy(lazy[ind], lazy[2 * ind + 1]);
+            lazy[2 * ind + 2] = combine_lazy(lazy[ind], lazy[2 * ind + 2]);
+        }
+        seg[ind] = add_lazy(seg[ind], lazy[ind], low, high);
+        lazy[ind] = lazy_default_value;
+    }
+    void set_value(int ind, int low, int high, int idx, T x){
+        set_lazy(ind, low, high, lazy_default_value);
+        if (low == high){
+            seg[ind] = x;
+            return;
+        }
+        int mid = (low + high) >> 1;
+        if (idx >= low && idx <= mid){
+            set_value(2 * ind + 1, low, mid, idx, x);
+        }else set_value(2 * ind + 2, mid + 1, high, idx, x);
+        seg[ind] = combine(seg[2 * ind + 1], seg[2 * ind + 2]);
+    }
+
+    void set_value(int i, T val){
+        set_value(0, 0, n - 1, i, val);
+    }
+    void update(int ind, int low, int high, int left, int right, U val){
+        set_lazy(ind, low, high, lazy_default_value);
         if (low >= left && high <= right){
-            return set_lazy(ind, low, high, x);
+            return set_lazy(ind, low, high, val);
         }
         if (high < left || low > right) return;
         int mid = (low + high) >> 1;
-        update(2 * ind + 1, low, mid, left, right, x);
-        update(2 * ind + 2, mid + 1, high, left, right, x);
-        seg[ind] = func(seg[2 * ind + 1], seg[2 * ind + 2]);
+        update(2 * ind + 1, low, mid, left, right, val);
+        update(2 * ind + 2, mid + 1, high, left, right, val);
+        seg[ind] = combine(seg[2 * ind + 1], seg[2 * ind + 2]);
+    }
+    void update(int l, int r, U val){
+        update(0, 0, n - 1, l, r, val);
     }
 
-    void update(int l, int r, ll val){
-        return update(0, 0, n - 1, l, r, val);
-    }
-
-    void set_value(int i, ll val){
-        update(i, i, val - query(i, i));
-    }
-
-    ll query(int l, int r){
+    T query(int l, int r){
         return query(0, 0, n - 1, l, r);
     }
 };
+
+ll combine(ll x, ll y){return x + y;}
+ll combine_lazy(ll x, ll y){return x + y;}
+ll add_lazy(ll x, ll y, int low, int high){return x + y * (high - low + 1);}
+int main() {
+
+    int t;
+    cin >> t;
+    while (t --){
+        int n, q;
+        cin >> n >> q;
+        SegmentTree<ll, ll, 0LL, 0LL, combine, combine_lazy, add_lazy> tree;
+        tree.init(n);
+        while (q --){
+            int t;
+            cin >> t;
+            int l, r;
+            cin >> l >> r;
+            -- l, -- r;
+            if (t) cout << tree.query(l, r) << "\n";
+            else{
+                int x;
+                cin >> x;
+                tree.update(l, r, x);
+            } 
+        }
+    }
+}
