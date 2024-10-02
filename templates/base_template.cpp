@@ -47,6 +47,10 @@ typedef vector<pll> vpll;
 typedef vector<pli> vpli;
 typedef vector<pil> vpil;
 
+typedef vector<vvi> vvvi;
+typedef vector<vvvi> vvvvi;
+typedef vector<vvvvi> vvvvvi;
+
 template <typename T>
 void get_unique(vector<T>& a) {
     sort(a.begin(), a.end());
