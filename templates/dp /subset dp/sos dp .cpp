@@ -3,7 +3,11 @@
 f(x) : count something from all subsets of x
 time complexity to find f(x) for all nubmers upto n : O(NLogN)
 
-max_log = ceil(log2(max_value)) + 1
+max_log = 1 + max(31 - __builtin_ctz(all values))
+max_n = 1 << max_log
+
+iterate from 0 to max_log - 1
+iterate from 0 to max_n - 1
 
 1) if we want count of elements that are subset/superset of x, then store count of each element in dp and use take_contribution from 
     subset/supserset
