@@ -1,3 +1,4 @@
+//add 0 to the start of a, if required 
 //call solve function for each test case
 
 void solve(){
