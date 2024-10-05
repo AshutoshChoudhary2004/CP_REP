@@ -1,4 +1,4 @@
-//cal func for each test case
+//call func for each test case
 
 int n;
 vl dp, prv;
