@@ -1,11 +1,14 @@
 //add 0 (a dummy element) to the start of a, if required 
+//i.e if you can split at index -1 also
 //call solve function for each test case
+//if you want ans for max dp modify line 35 and 45, change <= to >= 
 
 void solve(){
 
     //take input here
 
     vl dp(n);
+    //set the value of dp[0]
     dp[0] = 0;
 
     //define const function
