@@ -1,7 +1,8 @@
 //add 0 (a dummy element) to the start of a, if required 
 //i.e if you can split at index -1 also
 //call solve function for each test case
-//if you want ans for max dp modify line 35 and 45, change <= to >= 
+//if you want ans for max dp modify line 36 and 46, change <= to >= 
+//dp[i] represents if last index cut is is, then what is the min cost
 
 void solve(){
 
