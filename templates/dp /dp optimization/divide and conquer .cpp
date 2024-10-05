@@ -1,3 +1,5 @@
+//cal func for each test case
+
 int n;
 vl dp, prv;
 
@@ -21,6 +23,9 @@ void solve(int l, int r, int opt1, int opt2){
 }
 
 void func(){
+    //take input here
+    //resize dp, prv
+    
     //init value of dp when k = 1, ans last cut at i
     fr(i, n){
         dp[i] = ;
