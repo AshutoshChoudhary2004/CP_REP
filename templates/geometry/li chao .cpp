@@ -35,6 +35,7 @@ and if max_x is around 1e5 you can pass 1e6
 TC will be same, but don't pass veryyy big values, otherwise it might overflow
 
 */
+
 template<typename T, T min_x, T max_x, T def_val>
 struct Lichao{
     struct Line{
@@ -47,18 +48,14 @@ struct Lichao{
         Line line = {0, def_val};
         Node* left = NULL, *right = NULL;
     };
-    
     Node* root = new Node();
     T query(Node* node, T l, T r, T x){
         if (!node) return def_val;
         T res = node -> line.eval(x);
         T m = (l + r) >> 1;
         if (x > m) res = max(res, query(node -> right, m + 1, r, x));
-        else if (x < m) res = max(res, query(node -> left, l, m, x));
+        else res = max(res, query(node -> left, l, m, x));
         return res;
-    }    
-    T query(T x){
-        return query(root, min_x, max_x, x);
     }
     void update(Node* node, T l, T r, Line new_line){
         if (node -> line.eval(l) >= new_line.eval(l)) swap(node -> line, new_line);
@@ -76,7 +73,11 @@ struct Lichao{
             update(node -> left, l, m, new_line);
         }
     }
+    T query(T x){
+        return query(root, min_x, max_x, x);
+    }
     void add_line(T m, T c){
         update(root, min_x, max_x, {m, c});
     }
 };
+
