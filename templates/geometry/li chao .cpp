@@ -36,7 +36,7 @@ TC will be same, but don't pass veryyy big values, otherwise it might overflow
 
 */
 template<typename T, T min_x, T max_x, T def_val>
-struct LiChao{
+struct Lichao{
     struct Line{
         T m, c;
         inline T eval(T x){
