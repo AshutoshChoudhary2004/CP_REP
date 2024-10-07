@@ -55,11 +55,5 @@ void solve(){
             }
         }
     }
-    //if we can get min ans even when last cut is not at n - 1, then calculate that
-    // ll res = 1e18;
-    // fr(i, n){
-    //     add cost(i, n - 1) or whatever necessary to dp[i]
-    //     res = min(res, dp[i] + );
-    // }
     cout << dp[n - 1] << "\n";
 }
