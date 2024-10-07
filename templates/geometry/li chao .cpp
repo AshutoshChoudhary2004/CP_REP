@@ -13,7 +13,7 @@ max value = query (x)
 ### IF we want the min value : 
 
 to add line : add_line(-m, -c)
-min_value = - query(-x)
+min_value = - query(x)
 
 def_val : The default value of x
 
