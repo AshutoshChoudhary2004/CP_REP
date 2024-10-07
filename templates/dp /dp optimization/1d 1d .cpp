@@ -2,7 +2,7 @@
 //i.e if you can split at index -1 also
 //call solve function for each test case
 //if you want ans for max dp modify line 36 and 46, change <= to >= 
-//dp[i] represents if last index cut is is, then what is the min cost
+//dp[i] represents ans for array 0 .. i, and the last element of the group / subarray is i
 
 void solve(){
 
