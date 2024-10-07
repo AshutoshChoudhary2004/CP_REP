@@ -1,4 +1,8 @@
-//call func for each test case
+//add 0 (a dummy element) to the start of a, if required 
+//i.e if you can split at index -1 also
+//call solve function for each test case
+//if you want ans for max dp modify line 36 and 46, change <= to >= 
+//dp[i][k] represents ans for array 0 .. i, and the last element of the kth group / subarray is i
 
 int n;
 vl dp, prv;
