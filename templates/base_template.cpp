@@ -1,5 +1,14 @@
 #include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
 using namespace std;
+using namespace __gnu_pbds;
+
+template <typename T>
+using ordered_set = tree<T, null_type, less_equal<T>, rb_tree_tag, tree_order_statistics_node_update>;
+//swap lb, ub
+//to erase : if (st.ub(x) != st.end()) st.erase(st.ub(x))
 
 constexpr int mod = 1000000007;
 constexpr int mod2 = 998244353;
