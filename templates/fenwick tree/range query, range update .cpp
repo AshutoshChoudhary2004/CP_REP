@@ -8,13 +8,11 @@ struct FenwickTree{
         b2.resize(n + 1, 0);
     }
     void point_update(int idx, ll x, vl &b){
-        for (int i = idx; i <= n; i += i & -i){
+        for (int i = idx + 1; i <= n; i += i & -i){
             b[i] += x;
         }
     }
     void update(int l, int r, ll x){
-        l += 1;
-        r += 1;
         point_update(l, x, b1);
         point_update(r + 1, -x, b1);
         point_update(l, x * (l - 1), b2);
@@ -22,7 +20,7 @@ struct FenwickTree{
     }
     ll sum(int idx, vl &b){
         ll res = 0;
-        for (int i = idx; i > 0; i -= i & -i){
+        for (int i = idx + 1; i > 0; i -= i & -i){
             res += b[i];
         } 
         return res;
@@ -31,7 +29,7 @@ struct FenwickTree{
         return sum(idx, b1) * idx - sum(idx, b2);
     }
     ll query(int l, int r){
-        return prefix_sum(r + 1) - prefix_sum(l - 1 + 1);
+        return prefix_sum(r) - prefix_sum(l - 1);
     }
     void set_value(int idx, ll val){
         update(idx, idx, val - query(idx, idx));
