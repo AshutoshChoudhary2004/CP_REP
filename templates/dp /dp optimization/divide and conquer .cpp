@@ -14,14 +14,17 @@ ll cost(int i, int j){
 void solve(int l, int r, int opt1, int opt2){
     if (l > r) return;
     int m = (l + r) >> 1;
-    pll best = mp(1e18, -1);
-    for (ll i = max(0, opt1); i <= min(m - 1, opt2); ++ i){
+    dp[m] = 1e18;
+    int opt = opt1;
+    for (ll i = opt1; i <= min(m - 1, opt2); ++ i){
         //call cost(i + 1, m) or cost(i, m) according to the question
         //and how cost function is defined
-        best = min(best, mp(prv[i] + cost(i, m), i));
+        val = prv[i] + cost(i, m);
+        if (val < dp[m]){
+            dp[m] = val;
+            opt = i;
+        }
     }
-    int opt = best.S;
-    dp[m] = best.F;
     solve(l, m - 1, opt1, opt);
     solve(m + 1, r, opt, opt2);
 }
