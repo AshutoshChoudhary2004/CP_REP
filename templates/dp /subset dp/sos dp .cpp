@@ -61,6 +61,12 @@ iterate from 0 to max_n - 1
 10) if we have any one of these we can find any one of these : 
     counf of elements of array that satisfy f(x)
     count of subsequence / subset of array that satify f(x)
+
+11) THUMB RULE : 
+
+-> Using sos dp we can iterate over all (subset / superset) / take answer from all of our (subset / superset) of a number x
+-> If we only want to count all (subsets / supersets) of x, that are present in array, then nothing changes
+   just make dp[i] = 1, if i is in array 
 */
 
 const ll max_log = 20;
