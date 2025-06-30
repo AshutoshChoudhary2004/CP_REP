@@ -3,7 +3,7 @@
 f(x) : count something from all subsets of x
 time complexity to find f(x) for all nubmers upto n : O(NLogN)
 
-max_log = 1 + max(31 - __builtin_ctz(all values))
+max_log = 1 + max(31 - __builtin_clz(all values))
 max_n = 1 << max_log
 
 iterate from 0 to max_log - 1
