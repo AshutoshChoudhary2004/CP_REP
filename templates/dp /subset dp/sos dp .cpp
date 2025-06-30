@@ -57,6 +57,10 @@ iterate from 0 to max_n - 1
 9) If we want to count for each x, how many subbsets (formed using elements of array) form x (or form superset of x or form subset of x, can be calculated ) then first
     we will count no of elements that form subset / superset of x (by storing count of each element in dp) then calling take_contri function
     then we will replace dp[i] with 1 << dp[i] for all i
+    
+10) if we have any one of these we can find any one of these : 
+    counf of elements of array that satisfy f(x)
+    count of subsequence / subset of array that satify f(x)
 */
 
 const ll max_log = 20;
