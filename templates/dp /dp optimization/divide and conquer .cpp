@@ -16,7 +16,7 @@ void solve(int l, int r, int opt1, int opt2){
     int m = (l + r) >> 1;
     dp[m] = 1e18;
     int opt = opt1;
-    for (ll i = opt1; i <= opt2; ++ i){
+    for (ll i = opt1; i <= min(m - 1, opt2); ++ i){
         //call cost(i + 1, m) or cost(i, m) according to the question
         //and how cost function is defined
         val = prv[i] + cost(i, m);
