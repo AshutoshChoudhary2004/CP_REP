@@ -34,6 +34,29 @@ and if max_x is around 1e5 you can pass 1e6
 
 TC will be same, but don't pass veryyy big values, otherwise it might overflow
 
+works any type of functions such that each two only intersect atmost once
+
+EXPLANATION : 
+
+Each node / line gives the best resuklt for x = mid point of the range of that node
+
+Query : 
+1) first we consider this line / node to best for given x
+2) but we no, that the line / node whose mid value is x, will be the best result
+3) so we move towards that line / node
+
+Update: (use this image for reference : https://cp-algorithms.com/geometry/li_chao_vertex.png)
+1) if the value of f(l) is higher for current line then we swap it
+2) so now the new line will always be the green one
+3) now the new line beats current line on the left, we check if it also beats the current line on the right
+   if yes then the new line beats the current line everywhere, so ne need of current line, we save new line 
+   in current node and return
+4) else we need to keep the line that gives best result for the mid point of this range on this node
+5) if new line gives better result than current line on mid, it means mid is to the left of intersection,
+    so we save new line in current node, but the current line can still give better result to the right of 
+    intersection, so we call to the right and pass current line
+6) else it means current line gives better result for mid, which means current mid point is to the right of
+   intersection, so we call to the left and pass new line
 */
 
 template<typename T, T min_x, T max_x, T def_val>
