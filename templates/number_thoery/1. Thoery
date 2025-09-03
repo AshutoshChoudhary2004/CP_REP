@@ -21,7 +21,7 @@
 
   therefore the general solutions of the equations ax + by = c are
   x = x0 + u = x0 + kb/g
-  y = y0 = v = y0 - ka/g
+  y = y0 + v = y0 - ka/g
 
   where k can be any integer value in the entire Z plane
 
