@@ -87,23 +87,23 @@ void get_unique(vector<T>& a) {
 }
 
 ll floor_div(ll x, ll y) {
-	assert(y != 0);
-	if (y < 0) {
-		y = -y;
-		x = -x;
-	}
-	if (x >= 0) return x / y;
-	return (x + 1) / y - 1;
+    assert(y != 0);
+    if (y < 0) {
+        y = -y;
+        x = -x;
+    }
+    if (x >= 0) return x / y;
+    return (x - y + 1) / y;
 }
 
 ll ceil_div(ll x, ll y) {
-	assert(y != 0);
-	if (y < 0) {
-		y = -y;
-		x = -x;
-	}
-	if (x <= 0) return x / y;
-	return (x - 1) / y + 1;
+    assert(y != 0);
+    if (y < 0) {
+        y = -y;
+        x = -x;
+    }
+    if (x >= 0) return (x + y - 1) / y;
+    return x / y; 
 }
 
 template <class S, class T> ostream& operator<<(ostream& os, const vector<pair<S, T>>& p) { os << "[ "; for (auto it = p.begin(); it != p.end(); ++it) { os << *it; if (it != prev(p.end())) { os << ", "; } } os << " ]"; return os; }
