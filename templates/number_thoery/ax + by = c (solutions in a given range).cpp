@@ -4,73 +4,73 @@
 2. and to find the solutions use range of minK and maxK
 
 */
-#include<bits/stdc++.h>
-#define ll long long
-#define mod 1000000007
-using namespace std;
 
-ll gcd(ll a, ll b, ll &x0, ll &y0){
-
-    if (b == 0){
-        x0 = 1;
-        y0 = 0;
-        return a;
+ll floor_div(ll x, ll y) {
+    assert(y != 0);
+    if (y < 0) {
+        y = -y;
+        x = -x;
     }
-    ll x1, y1;
-    ll g = gcd(b, a % b, x1, y1);
-    x0 = y1;
-    y0 = x1 - (a / b) * y1;
-    return g;
+    if (x >= 0) return x / y;
+    return (x - y + 1) / y;
 }
 
-bool find_any_solution(ll a, ll b, ll c, ll &x0, ll &y0, ll &g){
-
-    g = gcd(abs(a), abs(b), x0, y0);
-    if (c % g) return false;
-    x0 *= c / g;
-    y0 *= c / g;
-    if (a < 0) x0 *= -1;
-    if (b < 0) y0 *= -1;
-    return true;
+ll ceil_div(ll x, ll y) {
+    assert(y != 0);
+    if (y < 0) {
+        y = -y;
+        x = -x;
+    }
+    if (x >= 0) return (x + y - 1) / y;
+    return x / y;
 }
 
-int main(){
-
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    ll ans = 0;
-    ll a, b, c, x1, x2, y1, y2, g, x0, y0;
+void ashuhua() {
+    ll a, b, c, x1, x2, y1, y2;
     cin >> a >> b >> c >> x1 >> x2 >> y1 >> y2;
     c *= -1;
-    if (!a && !b){
-        if (!c) ans = (x2-x1+1) * (y2-y1+1);
-    } 
-    else if (!a){
-        ans = !(c % b) && c / b >= y1 && c / b <= y2;
+    if (a == 0 || b == 0){
+        if (a == 0 && b == 0) cout << (c == 0 ? (x2 - x1 + 1) * (y2 - y1 + 1) : 0);
+        else if (a == 0) cout << (c % b == 0 && c / b >= y1 && c / b <= y2);
+        else if (b == 0) cout << (c % a == 0 && c / a >= x1 && c / a <= x2);
+        return;
     }
-    else if (!b){
-        ans = !(c % a) && c / a >= x1 && c / a <= x2;
+    ll g, x0, y0;
+    auto getSolution = [&](){
+        auto gcd = [&](auto&& gcd, ll a, ll b, ll& x0, ll& y0) -> ll  {
+            if (b == 0){
+                x0 = 1;
+                y0 = 0;
+                return a;
+            }
+            ll x1, y1;
+            ll g = gcd(gcd, b, a % b, x1, y1);
+            x0 = y1;
+            y0 = x1 - (a / b) * y1;
+            return g;
+        };
+        g = gcd(gcd, abs(a), abs(b), x0, y0);
+        if (c % g) return false;
+        x0 *= c / g;
+        y0 *= c / g;
+        if (a < 0) x0 *= -1;
+        if (b < 0) y0 *= -1;
+        return true;
+    };
+    if (!getSolution()){
+        cout << 0;
+        return;
     }
-    else if (find_any_solution(a, b, c, x0, y0, g)){
-        ll mink1, maxk1, mink2, maxk2;
-        if (b > 0){
-            mink1 = ceil((x1 - x0) * 1.0 * g / b);
-            maxk1 = floor((x2 - x0) * 1.0  * g / b);
-        }else{
-            mink1 = ceil((x2 - x0) * 1.0  * g / b);
-            maxk1 = floor((x1 - x0) * 1.0 * g / b);
+    auto get = [&](ll x, ll b, ll mn, ll mx) -> vl {
+        ll val1 = mn - x, val2 = mx - x;
+        if (b > 0) {
+            return {ceil_div(val1, b), floor_div(val2, b)}; 
+        } else {
+            return {ceil_div(val2, b), floor_div(val1, b)};
         }
-        if (a > 0){
-            maxk2 = floor(-1 * (y1 - y0) * 1.0 * g / a);
-            mink2 = ceil(-1 * (y2 - y0) * 1.0 * g / a);
-        }else{
-            mink2 = ceil(-1 * (y1 - y0) * 1.0 * g / a);
-            maxk2 = floor(-1 * (y2 - y0) * 1.0 * g / a);
-        }
-        ll mink = max(mink1, mink2);
-        ll maxk = min(maxk1, maxk2);
-        if (mink <= maxk) ans = maxk - mink + 1;
-    }
-    cout << ans << "\n";
-}   
+    };  
+    vl res1 = get(x0, b / g, x1, x2);
+    vl res2 = get(y0, - a / g, y1, y2);
+    cout << max(0LL, min(res2[1], res1[1]) - max(res2[0], res1[0]) + 1);
+}
+
