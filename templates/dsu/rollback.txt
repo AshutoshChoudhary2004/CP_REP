@@ -1,11 +1,38 @@
-if you want to rollback to the preivous state of dsu
-then dont use path compression, then change will happen only after a union operation
+TC : LogN
 
-change that will happen: 
-par[xx] = yy
-sz[yy] += sz[xx]
-therefore after each operation
-store in an array this xx
-therefore to rollback to previous sate
-we know yy from par[xx], therefore sz[yy] -= sz[xx]
-we will set par[xx] = xx
+struct DSU {
+    vi p;
+    vi sz;
+    vi st;
+    int n;
+    void init(int _n) {
+        n = _n;
+        p.resize(n);
+        sz.assign(n, 1);
+        fr(i, n) p[i] = i;
+    }
+    int find(int x) {
+        if (x == p[x]) return x;
+        return find(p[x]);
+    }
+    void unite(int x, int y) {
+        int xx = find(x), yy = find(y);
+        if (xx == yy) {
+            st.pb(-1);
+            return;
+        }
+        if (sz[xx] < sz[yy]) swap(xx, yy);
+        st.pb(yy);
+        sz[xx] += sz[yy];
+        p[yy] = xx;
+    }
+    void rollback() {
+        if (si(st)) {
+            int u = st.back();
+            st.pop_back();
+            if (u == -1) return;
+            sz[p[u]] -= sz[u];
+            p[u] = u;
+        }
+    }
+};
